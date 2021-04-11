@@ -68,6 +68,14 @@ client.connect(err => {
       res.send(result.insertedCount > 0)
     })
   })
+  //* GET SPECIFIC USER ORDER LIST 
+  app.get('/orderItems', (req, res) => {
+    console.log(req.query.email);
+    userOrderedCollection.find({email : req.query.email})
+    .toArray((err, items) => {
+      res.send(items)
+    })
+  })
   
   // client.close();
 });
