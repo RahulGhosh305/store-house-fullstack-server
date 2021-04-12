@@ -9,13 +9,9 @@ require('dotenv').config()
 
 
 const port = process.env.PORT || 5000
-app.listen(port, () => {
-    console.log(`app listening at http://localhost:${port}`)
-})
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+
+
 
 //* Mongo Data Base
 const MongoClient = require('mongodb').MongoClient;
@@ -27,6 +23,10 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
   const storeHouseCollection = client.db("storeHouseDb").collection("allProduct");
   const userOrderedCollection = client.db("storeHouseDb").collection("userOrdered");
+
+  app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
 
   //* ADD SINGLE PRODUCT TO MONGO DATABASE
   app.post('/addProduct', (req, res) => {
@@ -81,5 +81,7 @@ client.connect(err => {
 });
 
 
-
+app.listen(port, () => {
+  console.log(`app listening at http://localhost:${port}`)
+})
 
